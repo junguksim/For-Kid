@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssafy.happyhouse.model.dao.CommentDao">
+
+	<select id="getCommentAboutApt" resultType="Comment">
+		SELECT * FROM comment where aptNo=#{aptNo}
+	</select>
+	
+	<insert id="registComment">
+		INSERT INTO comment (content, registDate, writerId, aptNo) VALUES (#{content}, now(), #{writerId}, #{aptNo})
+	</insert>
+	
+	<delete id="deleteComment">
+		DELETE FROM comment WHERE no=#{commentNo}
+	</delete>
+</mapper>

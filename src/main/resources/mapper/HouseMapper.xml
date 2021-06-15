@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssafy.happyhouse.model.dao.HouseDao">
+	
+	<!-- houseList 전체 목록 가져오기 (아파트명, 최저가격, 경도, 위도, 주소 풀네임)-->
+	<select id="getAllHouseList" resultType="HouseList">
+		SELECT d.aptNo, d.aptname, MIN(d.dealAmount) as dealAmount, MIN(d.guarantyMoney) as guarantyMoney,
+		d.type, d.area, d.guguncode, i.lat, i.lng, i.dong,
+		(SELECT CONCAT(city,' ',gugun,' ',dong) from baseaddress WHERE guguncode=d.guguncode and dong=d.dong) as addressName
+		FROM housedeal d JOIN houseinfo i ON d.aptname = i.aptname
+		WHERE i.guguncode=#{guguncode}
+		GROUP BY d.aptname
+	</select>
+	<select id="getLatLng" resultType="houseInfo">
+		SELECT lat, lng
+		FROM baseaddress
+		WHERE guguncode=#{guguncode} AND dong=#{dong};
+	</select>
+	
+	
+	<!-- 특정 아파트의 상세 정보 -->
+	<select id="getHouseInfo" resultType="HouseInfo">
+		select *
+		from houseinfo
+		where aptName = #{aptName} and guguncode = #{guguncode}
+	</select>
+	
+	<!-- 특정 아파트의 상세 거래정보 모두 가져오기 (아파트명, 면적, 거래값)-->
+	<select id="getAllHouseDeal" resultType="HouseDeal">
+		select * from housedeal 
+		where aptNo = #{aptNo}
+	</select>
+
+	<!-- 특정 아파트의 거래 정보 (타입-평수에 따라)  -->
+	<select id="getAllHousePrice" resultType="HousePrice">
+		select type, area, min(dealAmount) as dealAmount, min(guarantyMoney) as guarantyMoney, areaSize from housedeal 
+		where aptNo = #{aptNo}
+		group by areaSize, type
+		order by areaSize, type
+	</select>
+</mapper>

@@ -1,0 +1,61 @@
+header {
+  margin: 20px;
+}
+
+#logo {
+  font-size: 50px;
+  text-decoration: none;
+  color: rgb(52, 184, 52);
+  font-weight: 600;
+}
+
+header > #userDiv {
+  display: inline;
+  float: right;
+  padding: 25px;
+}
+
+#userDiv > button {
+  margin: 10px;
+}
+
+nav {
+  width: 100%;
+}
+
+nav > div > ul > li {
+  font-size: 20px;
+  margin: 0px 10px 0px 10px;
+}
+
+#content {
+  display: flex;
+  margin: 30px;
+  height: 500px;
+}
+
+#tradeInfoContainerDiv {
+  flex: 2.5;
+  overflow: scroll;
+}
+
+#map {
+  flex: 7.5;
+}
+
+.houseName {
+  text-decoration: none;
+  color: black;
+  font-size: 20px;
+}
+
+.house_info_statement {
+  font-weight: bold;
+}
+
+#houseDetailDiv{
+	margin-bottom: 40px;
+}
+img{
+	margin : 5px;
+}

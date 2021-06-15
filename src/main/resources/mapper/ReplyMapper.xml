@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssafy.happyhouse.model.dao.ReplyDao">
+  
+  <select id="selectReplyAll" resultType="Reply">
+		SELECT replyNo, boardNo, content, writerId, (SELECT userName FROM member where userId=writerId) as writerName, registDate 
+		FROM reply
+		WHERE boardNo=#{boardNo}
+  </select>
+  
+  <select id="selectReply" resultType="Reply">
+		SELECT replyNo, boardNo, content, writerId, (SELECT userName FROM member where userId=writerId) as writerName, registDate 
+		FROM reply
+		WHERE replyNo=#{replyNo}
+  </select>
+  
+  <insert id="registReply">
+  		INSERT INTO reply (boardNo, writerId, content, registDate) values (#{boardNo}, #{writerId}, #{content}, now())
+  </insert>
+  
+  <update id="updateReply">
+  		UPDATE reply SET content=#{content} where replyNo=#{replyNo}
+  </update>
+  
+  <delete id="deleteReply">
+  		DELETE FROM reply where replyNo = #{replyNo}
+  </delete>
+</mapper>
