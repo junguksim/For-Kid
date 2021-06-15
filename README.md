@@ -123,3 +123,8 @@
 ### 17) 답변 수정 페이지
 
 ![image](https://user-images.githubusercontent.com/44252639/121978341-f2747500-cdc2-11eb-961a-c6ef3c699386.png)
+
+
+## 기여자
+- [심정욱](https://github.com/junguksim)
+- [이상현](https://github.com/kimkuan)
